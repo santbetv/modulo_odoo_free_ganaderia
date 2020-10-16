@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="ganaderia_ganado_view_tree" model="ir.ui.view">
+        <field name="name">ganaderia.ganado.tree</field>
+        <field name="model">ganaderia.ganado</field>
+        <field name="arch" type="xml">
+            <tree string="Ganado">
+                <field name="fecha_ingreso" />
+                <field name="nombre_animal" />
+                <field name="tipo_sexo" />
+                <field name="raza" />
+                <field name="peso" />
+                <field name="edad_meses" />
+                <field name="precio" />
+                <field name="estado_corporal" />
+                <field name="observacion" />
+            </tree>
+        </field>
+    </record>
+
+
+<record id='ganaderia_ganado_action' model='ir.actions.act_window'>
+        <field name="name">Ganado</field>
+        <field name="res_model">ganaderia.ganado</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Crear un Ganado
+          </p>
+        </field>
+    </record>
+</odoo>

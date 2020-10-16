@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem name="Ganderia" id="ganaderia" sequence="10" web_icon="ganaderia,static/description/icon.png"/>
+
+    <menuitem name="Operaciones" parent="ganaderia" id="ganaderia_operaciones" sequence="10" />
+    <menuitem name="Parametricas" parent="ganaderia" id="ganaderia_parametricas" sequence="20" />
+
+    <!-- menu para dejar ver los componentes y habilitar las vistas -->
+    <menuitem action="ganaderia_ganado_action" parent="ganaderia_operaciones" id="ganaderia_operaciones_ganado" sequence="10"/>
+    <menuitem action="ganaderia_ganadero_action" parent="ganaderia_operaciones" id="ganaderia_operaciones_ganadero" sequence="20"/>
+    <menuitem action="ganaderia_finca_action" parent="ganaderia_operaciones" id="ganaderia_operaciones_finca" sequence="30"/>
+
+    <menuitem action="ganaderia_departamento_action" parent="ganaderia_parametricas" id="ganaderia_parametricas_departamento" sequence="10"/>
+    <menuitem action="ganaderia_ciudad_action" parent="ganaderia_parametricas" id="ganaderia_parametricas_ciudad" sequence="20"/>
+
+</odoo>

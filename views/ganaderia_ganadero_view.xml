@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="ganaderia_ganadero_view_tree" model="ir.ui.view">
+        <field name="name">ganaderia.ganadero.tree</field>
+        <field name="model">ganaderia.ganadero</field>
+        <field name="arch" type="xml">
+            <tree string="Ganadero">
+                <field name="tipo_documento" />
+                <field name="documento" />
+                <field name="nombre" />
+                <field name="apellido" />
+                <field name="movil" />
+                <field name="email" />
+                <field name="fecha_nacimiento" />
+                <field name="ano_negocio" />
+            </tree>
+        </field>
+    </record>
+
+<record id='ganaderia_ganadero_action' model='ir.actions.act_window'>
+        <field name="name">Ganadero</field>
+        <field name="res_model">ganaderia.ganadero</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Crear un Ganadero
+          </p>
+        </field>
+    </record>
+</odoo>

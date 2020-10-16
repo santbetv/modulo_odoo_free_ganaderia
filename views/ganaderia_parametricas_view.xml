@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record id='ganaderia_departamento_action' model='ir.actions.act_window'>
+        <field name="name">Departamentos</field>
+        <field name="res_model">ganaderia.departamento</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Parametrizar departamento
+          </p>
+        </field>
+    </record>
+
+    <record id='ganaderia_ciudad_action' model='ir.actions.act_window'>
+        <field name="name">Ciudades</field>
+        <field name="res_model">ganaderia.ciudad</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Parametrizar ciudad
+          </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- insert en un modelo-->
+    <!-- Record es un insert en un modelo -->
+   <record id="module_ganaderia_category" model="ir.module.category">
+            <field name="name">Ganaderia</field>
+            <!-- Numero de secuencia -->
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Creando dos grupos de usuarios -->
+        <!-- Creando grupo de usuario -->
+        <record id="ganaderia_group_consult" model="res.groups">
+            <field name="name">Consulta</field>
+            <!-- Va el campo de la categoria creada arriba-->
+            <field name="category_id" ref="module_ganaderia_category"/>
+            <!-- los usuarios de base.group_user Son usuarios que interactuan con el back-->
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Creando manager con su rol mas los anteriores -->
+        <record id="ganaderia_group_manager" model="res.groups">
+            <field name="name">Administrador</field>
+            <!-- heredando permisos del grupo anterior-->
+            <field name="implied_ids" eval="[(4, ref('ganaderia_group_consult'))]"/>
+            <field name="category_id" ref="module_ganaderia_category"/>
+            <!-- dando permisos de superadministrador en el sistema -->
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+</odoo>
