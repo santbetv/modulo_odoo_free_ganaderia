@@ -1,3 +1,4 @@
+![developer_python](https://user-images.githubusercontent.com/38901171/96529411-ae889a80-124a-11eb-8826-55dc611cdf35.png)
 
 
 # modulo_odoo_free_ganaderia
