@@ -11,10 +11,19 @@
                 <field name="area_ganaderia" />
                 <field name="tipo_area" />
                 <field name="description" />
-                <field name="ganadero_id">
-                    <field name="nombre" />
-                </field>
+                <field name="ganadero_id" />
             </tree>
+        </field>
+    </record>
+
+    <record id="ganaderia_finca_view_search" model="ir.ui.view">
+        <field name="name">ganaderia.finca.search</field>
+        <field name="model">ganaderia.finca</field>
+        <field name="arch" type="xml">
+            <search string="Finca">
+                <field name="nombre_finca" />
+                <field name="tipo_area" />
+            </search>
         </field>
     </record>
 

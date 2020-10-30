@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <record id="ganaderia_departamento_view_tree" model="ir.ui.view">
+        <field name="name">ganaderia.departamento.tree</field>
+        <field name="model">ganaderia.departamento</field>
+        <field name="arch" type="xml">
+            <tree string="Departamento">
+                <field name="codigo" />
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="ganaderia_ciudad_view_tree" model="ir.ui.view">
+        <field name="name">ganaderia.ciudad.tree</field>
+        <field name="model">ganaderia.ciudad</field>
+        <field name="arch" type="xml">
+            <tree string="Ciudad">
+                <field name="codigo" />
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+
+
+
 <record id='ganaderia_departamento_action' model='ir.actions.act_window'>
         <field name="name">Departamentos</field>
         <field name="res_model">ganaderia.departamento</field>

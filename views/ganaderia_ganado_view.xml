@@ -19,6 +19,18 @@
         </field>
     </record>
 
+    <record id="ganaderia_ganado_view_search" model="ir.ui.view">
+        <field name="name">ganaderia.ganado.search</field>
+        <field name="model">ganaderia.ganado</field>
+        <field name="arch" type="xml">
+            <search string="Ganado">
+                <field name="fecha_ingreso" />
+                <field name="nombre_animal" />
+                <field name="edad_meses" />
+                <field name="precio" />
+            </search>
+        </field>
+    </record>
 
 <record id='ganaderia_ganado_action' model='ir.actions.act_window'>
         <field name="name">Ganado</field>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+
     <record id="ganaderia_ganadero_view_tree" model="ir.ui.view">
         <field name="name">ganaderia.ganadero.tree</field>
         <field name="model">ganaderia.ganadero</field>
@@ -17,6 +18,17 @@
             </tree>
         </field>
     </record>
+
+    <!--<record id="ganaderia_ganadero_view_search" model="ir.ui.view">
+        <field name="name">ganaderia.ganadero.search</field>
+        <field name="model">ganaderia.ganadero</field>
+        <field name="arch" type="xml">
+            <search string="Ganadero">
+                <field name="documento" />
+                <field name="nombre" />
+            </search>
+        </field>
+    </record>-->
 
 <record id='ganaderia_ganadero_action' model='ir.actions.act_window'>
         <field name="name">Ganadero</field>
