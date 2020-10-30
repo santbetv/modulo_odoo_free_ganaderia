@@ -19,7 +19,7 @@
         </field>
     </record>
 
-    <!--<record id="ganaderia_ganadero_view_search" model="ir.ui.view">
+    <record id="ganaderia_ganadero_view_search" model="ir.ui.view">
         <field name="name">ganaderia.ganadero.search</field>
         <field name="model">ganaderia.ganadero</field>
         <field name="arch" type="xml">
@@ -28,7 +28,7 @@
                 <field name="nombre" />
             </search>
         </field>
-    </record>-->
+    </record>
 
 <record id='ganaderia_ganadero_action' model='ir.actions.act_window'>
         <field name="name">Ganadero</field>
