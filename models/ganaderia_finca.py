@@ -7,6 +7,7 @@ class GanaderiaFinca(models.Model):
     _name = 'ganaderia.finca' #nombre de mi modelo
     _description = 'Finca' #describe los datos
     _order = 'nombre_finca asc' #ordenamiento
+    _rec_name = 'nombre_finca'
     nombre_finca = fields.Char(string='Nombre de la finca', required=True, size=150, index=True)
     altitud = fields.Char(string='Altitud', required=True, size=150, index=True)
     area_ganaderia = fields.Char(string='Area de ganaderia', required=True, size=150, index=True)

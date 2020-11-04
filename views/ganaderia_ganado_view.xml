@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <record id="ganaderia_ganado_view_form" model="ir.ui.view">
+        <field name="name">ganaderia.ganado.form</field>
+        <field name="model">ganaderia.ganado</field>
+        <field name="arch" type="xml">
+            <form string="Ganado">
+                <header>
+                    <button name="aprobar_ganado" states="enestudio" string="Aprobar" type="object"
+                            class="oe_highlight" groups="ganaderia.ganaderia_group_manager" />
+                    <button name="rechazar_ganado" states="enestudio" string="Rechazar" type="object"
+                            class="oe_highlight" groups="ganaderia.ganaderia_group_manager" />
+                    <button name="devolver_ganado" states="approved,refused" string="Devolver" type="object"
+                            class="oe_highlight" groups="ganaderia.ganaderia_group_manager" />
+                    <field name="state" widget="statusbar" statusbar_visible="enestudio,approved,refused"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="fecha_ingreso" />
+                        <field name="nombre_animal" />
+                        <field name="tipo_sexo" />
+                        <field name="raza" />
+                        <field name="peso" />
+                        <field name="edad_meses" />
+                        <field name="precio" />
+                        <field name="estado_corporal" />
+                        <field name="observacion" />
+                        <field name="ciudad_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
     <record id="ganaderia_ganado_view_tree" model="ir.ui.view">
         <field name="name">ganaderia.ganado.tree</field>
         <field name="model">ganaderia.ganado</field>

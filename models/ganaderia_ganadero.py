@@ -7,6 +7,7 @@ class GanaderiaGandero(models.Model):
     _name = 'ganaderia.ganadero' #nombre de mi modelo
     _description = 'Ganadero' #describe los datos
     _order = 'nombre asc' #ordenamiento
+    _rec_name = 'nombre'
     # Relacion estatica
     # Indicamos seguimiento a la visibilidad con metodo onchange
     # Orden la accion con track_sequence

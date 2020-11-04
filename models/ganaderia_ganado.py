@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
-
-from odoo import fields, models
+from lxml.html.diff import token
+from odoo import fields, models, api
+import requests
+import json
+from pyatspi import state
 
 
 class GanaderiaGanado(models.Model):
     _name = 'ganaderia.ganado' #nombre de mi modelo
     _description = 'Ganado' #describe los datos
     _order = 'nombre_animal asc' #ordenamiento
+    _rec_name = 'nombre_animal'
     fecha_ingreso = fields.Date(string='Fecha de ingreso', required=True)
     nombre_animal = fields.Char(string='Nombre del animal', required=True, size=150, index=True)
     tipo_sexo = fields.Selection(
@@ -26,9 +30,56 @@ class GanaderiaGanado(models.Model):
          ], string='Estado corporal', required=True, index=True, track_visibility='onchange',
         track_sequence=5, default="1")
     observacion = fields.Char(string='Observación', required=True, size=150, index=True)
+    state = fields.Selection(
+        [('enestudio', 'En estudio'),
+         ('approved', 'Aprobado'),
+         ('refused', 'Rechazado'),
+         ], string='Estado', required=True, track_visibility='onchange',
+        track_sequence=11, default="enestudio")
     ciudad_id = fields.Many2one('ganaderia.ciudad', 'Ciudad', required=True)
     #  traigo las ciudades donde yo soy el cobrador de ese modelo
     _sql_constraints = {('ganado_uniq', 'unique(raza)', 'La raza debe ser Única')}
+
+    def aprobar_ganado(self):
+
+        url = "https://eloquent-salamander-3759.dataplicity.io/auth"
+        urlEncender = "https://eloquent-salamander-3759.dataplicity.io/led/red/"
+
+        payload = "{\n    \"username\": \"carloaiza@umanizales.edu.co\",\n    \"password\": \"prueba\"\n}"
+        payloadEncender = "{\n    \"state\":\"1\"\n}"
+
+        headers = {
+          'Content-Type': 'application/json'
+        }
+
+
+        response = requests.post(url, data = payload, headers=headers)
+
+        if response.status_code >= 200 and response.status_code <= 300:
+
+            token = response.json()['access_token']
+
+            headers['Authorization'] = "{0} {1}".format("JWT", token)
+
+            respuestaEncendido = requests.post(urlEncender, data = payloadEncender, headers=headers)
+
+            if respuestaEncendido.status_code >= 200 and respuestaEncendido.status_code <= 300:
+
+                print(respuestaEncendido.text.encode('utf8'))
+
+                self.write({'state': 'approved'})
+            else:
+                print("Se tiene error en paso encendido")
+        else:
+            print("Se tiene error en validar token")
+
+
+    def rechazar_ganado(self):
+        self.write({'state': 'refused'})
+
+    def devolver_ganado(self):
+        self.write({'state': 'enestudio'})
+
 
 class GanaderiaDepartamento(models.Model):
     _name = 'ganaderia.departamento'  # nombre de mi modelo

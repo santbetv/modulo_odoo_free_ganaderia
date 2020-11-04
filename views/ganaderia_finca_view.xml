@@ -12,6 +12,7 @@
                 <field name="tipo_area" />
                 <field name="description" />
                 <field name="ganadero_id" />
+                <field name="ganado_id" />
             </tree>
         </field>
     </record>
