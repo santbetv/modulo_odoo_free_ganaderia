@@ -27,6 +27,8 @@
                         <field name="precio" />
                         <field name="estado_corporal" />
                         <field name="observacion" />
+                        <field name="accion_rasp" />
+                        <field name="respuesta_rasp" />
                         <field name="ciudad_id" />
                     </group>
                 </sheet>

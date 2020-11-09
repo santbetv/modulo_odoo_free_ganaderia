@@ -3,8 +3,12 @@ from lxml.html.diff import token
 from odoo import fields, models, api
 import requests
 import json
+import logging
 from pyatspi import state
 
+from odoo.addons.restful.common import default
+
+_logger = logging.getLogger(__name__)
 
 class GanaderiaGanado(models.Model):
     _name = 'ganaderia.ganado' #nombre de mi modelo
@@ -36,6 +40,8 @@ class GanaderiaGanado(models.Model):
          ('refused', 'Rechazado'),
          ], string='Estado', required=True, track_visibility='onchange',
         track_sequence=11, default="enestudio")
+    respuesta_rasp = fields.Char(string='Aceptando ganado', required=True, size=150, default="Sin respuesta")
+    accion_rasp = fields.Char(string='Apertura de puerta', required=True, size=150, default="Sin respuesta")
     ciudad_id = fields.Many2one('ganaderia.ciudad', 'Ciudad', required=True)
     #  traigo las ciudades donde yo soy el cobrador de ese modelo
     _sql_constraints = {('ganado_uniq', 'unique(raza)', 'La raza debe ser Única')}
@@ -65,17 +71,54 @@ class GanaderiaGanado(models.Model):
 
             if respuestaEncendido.status_code >= 200 and respuestaEncendido.status_code <= 300:
 
-                print(respuestaEncendido.text.encode('utf8'))
-
-                self.write({'state': 'approved'})
+                #print(respuestaEncendido.text.encode('utf8'))
+                #self.write({'respuesta_rasp':str(respuestaEncendido.content).replace("b", "")})
+                estadoRespuesta = respuestaEncendido.json()['red']
+                if estadoRespuesta == "1":
+                    self.write({'respuesta_rasp': 'Activado en Raspberry'})
+                    self.write({'state': 'approved'})
             else:
-                print("Se tiene error en paso encendido")
+                _logger.info("Se tiene error en paso encendido" )
         else:
-            print("Se tiene error en validar token")
-
+            _logger.info("Se tiene error en validar token")
 
     def rechazar_ganado(self):
-        self.write({'state': 'refused'})
+
+        url = "https://eloquent-salamander-3759.dataplicity.io/auth"
+        urlEncender = "https://eloquent-salamander-3759.dataplicity.io/led/red/"
+
+        payload = "{\n    \"username\": \"carloaiza@umanizales.edu.co\",\n    \"password\": \"prueba\"\n}"
+        payloadEncender = "{\n    \"state\":\"0\"\n}"
+
+        headers = {
+            'Content-Type': 'application/json'
+        }
+
+        response = requests.post(url, data=payload, headers=headers)
+
+        if response.status_code >= 200 and response.status_code <= 300:
+
+            token = response.json()['access_token']
+
+            headers['Authorization'] = "{0} {1}".format("JWT", token)
+
+            respuestaEncendido = requests.post(urlEncender, data=payloadEncender, headers=headers)
+
+            if respuestaEncendido.status_code >= 200 and respuestaEncendido.status_code <= 300:
+
+                print(respuestaEncendido.text.encode('utf8'))
+
+                # self.write({'state': 'approved'})
+                #self.write({'respuesta_rasp': str(respuestaEncendido.text.encode('utf8'))})
+                estadoRespuesta = respuestaEncendido.json()['red']
+                if estadoRespuesta == "0":
+                    self.write({'respuesta_rasp': 'Inactivo en Raspberry'})
+                    self.write({'state': 'refused'})
+            else:
+                _logger.info("Se tiene error en paso encendido" )
+        else:
+            _logger.info("Se tiene error en validar token")
+
 
     def devolver_ganado(self):
         self.write({'state': 'enestudio'})
